@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://cv7jokwfvbbn2"]
+
+[ext_resource type="PackedScene" uid="uid://bk3awr1r5k4r0" path="res://Entities/paddle.tscn" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://14jkibh08tve" path="res://Scenes/base_game.gd" id="1_jjvhh"]
+[ext_resource type="Script" uid="uid://dy0cg3c4rmblj" path="res://Entities/player.gd" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://4sjdni4to8bx" path="res://Entities/ball.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://bxgr1a8g1qag0" path="res://Entities/ball.gd" id="5_kry3j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjgbg"]
+size = Vector2(1152, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
+size = Vector2(64, 648)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_jjvhh")
+
+[node name="Table" type="Node2D" parent="."]
+
+[node name="Background" type="ColorRect" parent="Table"]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.0944273, 0.104331, 0.179526, 1)
+
+[node name="Middle Line" type="ColorRect" parent="Table"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 571.0
+offset_right = 581.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
+position = Vector2(50, 324)
+script = ExtResource("2_8gbba")
+
+[node name="AI" parent="." instance=ExtResource("1_jjgbg")]
+position = Vector2(1102, 324)
+
+[node name="Ball" parent="." instance=ExtResource("2_bo1nx")]
+position = Vector2(576, 324)
+script = ExtResource("5_kry3j")
+
+[node name="Boundary" type="Node" parent="."]
+
+[node name="Top" type="StaticBody2D" parent="Boundary"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/Top"]
+position = Vector2(576, -32)
+shape = SubResource("RectangleShape2D_jjgbg")
+
+[node name="Bottom" type="StaticBody2D" parent="Boundary"]
+position = Vector2(0, 712)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/Bottom"]
+position = Vector2(576, -32)
+shape = SubResource("RectangleShape2D_jjgbg")
+
+[node name="ScoreArea" type="Node" parent="."]
+
+[node name="Left" type="Area2D" parent="ScoreArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea/Left"]
+position = Vector2(-32, 324)
+shape = SubResource("RectangleShape2D_bo1nx")
+
+[node name="Right" type="Area2D" parent="ScoreArea"]
+position = Vector2(1216, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea/Right"]
+position = Vector2(-32, 324)
+shape = SubResource("RectangleShape2D_bo1nx")
+
+[node name="GameScore" type="CanvasLayer" parent="."]
+
+[node name="PlayerScore" type="Label" parent="GameScore"]
+texture_filter = 1
+offset_left = 504.0
+offset_right = 544.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AIScore" type="Label" parent="GameScore"]
+texture_filter = 1
+offset_left = 608.0
+offset_right = 648.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
