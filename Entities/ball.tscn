@@ -1,4 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://4sjdni4to8bx"]
+[gd_scene load_steps=5 format=3 uid="uid://4sjdni4to8bx"]
+
+[ext_resource type="AudioStream" uid="uid://bsjwemscgg7kr" path="res://Assets/SFX/ping_pong_8bit_beeep.ogg" id="1_ekrrp"]
+[ext_resource type="AudioStream" uid="uid://grk86ehd3ol5" path="res://Assets/SFX/ping_pong_8bit_peeeeeep.ogg" id="2_p0u05"]
+[ext_resource type="AudioStream" uid="uid://wcg7ydhtn5ul" path="res://Assets/SFX/ping_pong_8bit_plop.ogg" id="3_vag2v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tktxq"]
 size = Vector2(10, 10)
@@ -20,3 +24,15 @@ grow_vertical = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tktxq")
+
+[node name="sfx_hit_collision" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ekrrp")
+volume_db = -16.0
+
+[node name="sfx_score" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_p0u05")
+volume_db = -16.0
+
+[node name="sfx_start" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vag2v")
+volume_db = -16.0

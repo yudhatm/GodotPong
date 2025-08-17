@@ -7,6 +7,10 @@ var window_size: Vector2
 var direction: Vector2
 const MAX_Y_VECTOR: float = 0.6
 
+@onready var sfx_hit_collision: AudioStreamPlayer = $sfx_hit_collision
+@onready var sfx_score: AudioStreamPlayer = $sfx_score
+@onready var sfx_start: AudioStreamPlayer = $sfx_start
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	window_size = get_viewport_rect().size
@@ -24,6 +28,14 @@ func _physics_process(delta: float) -> void:
 			direction = new_direction(collider)
 		else:
 			direction = direction.bounce(collision.get_normal())
+			
+		sfx_hit_collision.play()
+
+func play_start_sound():
+	sfx_start.play()
+
+func play_score_sound():
+	sfx_score.play()
 
 func reset_ball():
 	position.x = window_size.x / 2
