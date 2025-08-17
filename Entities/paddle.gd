@@ -1,8 +1,6 @@
 extends CharacterBody2D
 
-enum PaddleType {PLAYER, AI}
-
-@export var paddle_type: PaddleType = PaddleType.PLAYER
+@export var paddle_type: Enums.PaddleType = Enums.PaddleType.PLAYER
 @export var up_action: String = "up"
 @export var down_action: String = "down"
 
@@ -20,9 +18,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	match paddle_type:
-		PaddleType.PLAYER:
+		Enums.PaddleType.PLAYER:
 			handle_player_input(delta)
-		PaddleType.AI:
+		Enums.PaddleType.AI:
 			handle_ai_movement(delta)
 	
 	position.y = clamp(position.y, paddle_height / 2, screen_height - paddle_height / 2)
@@ -48,3 +46,19 @@ func handle_ai_movement(delta: float) -> void:
 		var move_direction = sign(distance_to_target)
 		var ai_speed = get_parent().PADDLE_SPEED * ai_reaction_speed
 		position.y += move_direction * ai_speed * delta
+		
+func set_ai_difficulty(diff: Enums.Difficulty):
+	match diff:
+		Enums.Difficulty.EASY:
+			ai_reaction_speed = 0.5
+			ai_prediction_offset = 60
+		
+		Enums.Difficulty.MEDIUM:
+			ai_reaction_speed = 0.65
+			ai_prediction_offset = 55
+			
+		Enums.Difficulty.HARD:
+			ai_reaction_speed = 0.8
+			ai_prediction_offset = 50
+		
+	

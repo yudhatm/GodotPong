@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8beuv2pldgju"]
+
+[ext_resource type="FontFile" uid="uid://dl3wpxxkxs5yf" path="res://Assets/Fonts/MatrixtypeDisplayBold.ttf" id="1_c8t1j"]
+[ext_resource type="Script" uid="uid://d3v3ca5sh0vty" path="res://Scenes/game_end_menu.gd" id="1_y3uhh"]
+
+[node name="GameEnd" type="CanvasLayer"]
+script = ExtResource("1_y3uhh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -60.0
+offset_right = 178.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_c8t1j")
+theme_override_font_sizes/font_size = 60
+text = "You Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 344.0
+offset_right = 728.0
+offset_bottom = 398.0
+theme_override_fonts/font = ExtResource("1_c8t1j")
+theme_override_font_sizes/font_size = 32
+text = "Play Again"
+
+[connection signal="pressed" from="Control/PlayButton" to="." method="_on_play_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cv7jokwfvbbn2"]
+[gd_scene load_steps=11 format=3 uid="uid://cv7jokwfvbbn2"]
 
 [ext_resource type="PackedScene" uid="uid://bk3awr1r5k4r0" path="res://Entities/paddle.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://14jkibh08tve" path="res://Scenes/base_game.gd" id="1_jjvhh"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://dp24bwsuacs7n" path="res://Entities/paddle.gd" id="3_kry3j"]
 [ext_resource type="Script" uid="uid://bxgr1a8g1qag0" path="res://Entities/ball.gd" id="5_kry3j"]
 [ext_resource type="FontFile" uid="uid://cvm4bsmdikfd2" path="res://Assets/Fonts/Matrixtype.ttf" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://cxa0gi0b51v2a" path="res://Scenes/main_menu.tscn" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://c8beuv2pldgju" path="res://Scenes/game_end_menu.tscn" id="8_344ge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjgbg"]
 size = Vector2(1152, 64)
@@ -41,6 +43,7 @@ position = Vector2(50, 324)
 script = ExtResource("3_kry3j")
 
 [node name="AI" parent="." node_paths=PackedStringArray("ball_reference") instance=ExtResource("1_jjgbg")]
+unique_name_in_owner = true
 position = Vector2(1102, 324)
 script = ExtResource("3_kry3j")
 paddle_type = 1
@@ -110,6 +113,11 @@ vertical_alignment = 1
 [node name="BallTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="MainMenu" parent="." instance=ExtResource("7_6bp64")]
+
+[node name="GameEnd" parent="." instance=ExtResource("8_344ge")]
+visible = false
 
 [connection signal="body_entered" from="ScoreArea/Left" to="." method="_on_left_body_entered"]
 [connection signal="body_entered" from="ScoreArea/Right" to="." method="_on_right_body_entered"]
