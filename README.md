@@ -2,6 +2,8 @@
 
 My first attempt on the first challenge of [20 Games Challenge](https://20_games_challenge.gitlab.io/)
 
+Inspired from this [Pong with Godot tutorial by Coding With Russ](https://youtu.be/Xq9AyhX8HUc?si=qjA1dc93rxKY-ZnB)
+
 Made using [Godot 4](https://godotengine.org/)
 
 ## Credits
