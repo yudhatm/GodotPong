@@ -1,4 +1,4 @@
-# Pong
+# GodotPong
 
 My first attempt on the first challenge of [20 Games Challenge](https://20_games_challenge.gitlab.io/)
 
